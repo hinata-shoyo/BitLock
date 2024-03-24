@@ -23,43 +23,45 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    role:{
-        type:String,
-        enum:['student','faculty'],
-        default:'student'
+    role: {
+      type: String,
+      enum: ["student", "faculty"],
+      default: "student",
     },
-    profilePicture:{
-        type:String
-    }
+    profilePicture: {
+      type: String,
+    },
   },
   {
     versionKey: false,
   }
 );
 
-const documentSchema = new mongoose.Schema({
-    title:{
-        type:String,
-        required:true
+const documentSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
     },
-    description:{
-        tyep:String
+    description: {
+      tyep: String,
     },
-    fileUrl:{
-        type:String,
-        required:true
+    fileUrl: {
+      type: String,
+      required: true,
     },
-    uploadedBy:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'User',
-        required:true
-    }
-},{
-    versionKey:false
-}
+    uploadedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+  },
+  {
+    versionKey: false,
+  }
 );
 
-const User = mongoose.model("User",userSchema)
-const Document = mongoose.model("Document", documentSchema)
+const User = mongoose.model("User", userSchema);
+const Document = mongoose.model("Document", documentSchema);
 
 module.exports = { connectdb, User, Document };

@@ -1,10 +1,8 @@
 const express = require("express");
 const Router = express.Router();
 const bcrypt = require("bcrypt");
-
-const { User, Documents } = require("../db/config.js");
-const { hash } = require("bcrypt");
-const { sign } = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
+const { User } = require("../db/config.js");
 
 Router.post("/signup", async (req, res) => {
   const { username, password, role, firstName, lastName, profilePicture } =
@@ -14,7 +12,7 @@ Router.post("/signup", async (req, res) => {
   if (user) {
     res.status(400).json({ msg: "user already exists" });
   } else {
-    const hashedPass = await hash(password, 10);
+    const hashedPass = await bcrypt.hash(password, 10);
 
     await User.create({
       username,
@@ -36,7 +34,7 @@ Router.post("/login", async (req, res) => {
     if (!isUser) {
       res.status(403).json({ msg: "wrong password" });
     }
-    const token = sign({ username }, process.env.JWT_SECRET);
+    const token = jwt.sign({ username }, process.env.JWT_SECRET);
     res.json({ token });
   } else {
     res.status(403).json({ msg: "wrong username" });

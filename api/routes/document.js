@@ -1,18 +1,11 @@
-const express = require("express")
-const Router = express.Router()
+const express = require("express");
+const authUser = require("../middleware/Auth.js");
+const Router = express.Router();
 
-Router.get("/", (req, res) => {
+Router.get("/", authUser, (req, res) => {});
 
-})
+Router.post("/upload", authUser, (req, res) => {});
 
-Router.post("/upload", (req, res) => {
+Router.get("/:id", authUser, (req, res) => {});
 
-})
-
-Router.get("/:id", (req, res) => {
-
-})
-
-Router.get("/", (req, res) => {
-    
-})
+Router.get("/", authUser, (req, res) => {});
