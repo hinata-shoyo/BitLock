@@ -2,6 +2,7 @@ const express = require("express");
 const Router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const authUser = require("../middleware/Auth.js");
 const { User } = require("../db/config.js");
 
 Router.post("/signup", async (req, res) => {
@@ -41,6 +42,10 @@ Router.post("/login", async (req, res) => {
   }
 });
 
-Router.post("/logout", (req, res) => {});
+Router.post("/logout",authUser, (req, res) => {
+  res.json({
+    msg:"Logout successful"
+  })
+});
 
 module.exports = Router;
