@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 const connectdb = () => {
-  mongoose.connect(process.env.DATABASE_STRING);
+  return mongoose.connect(process.env.DATABASE_STRING);
 };
 
 const userSchema = new mongoose.Schema(
@@ -19,8 +19,8 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    lastname: {
-      tyep: String,
+    lastName: {
+      type: String,
       required: true,
     },
     role:{

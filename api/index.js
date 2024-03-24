@@ -1,21 +1,19 @@
 const express =  require("express");
-const mongoose = require("mongoose");
 require("dotenv").config()
-
-const connectdb = require('./db/config')
+const userRouter = require("./routes/user")
+const { connectdb } = require('./db/config')
 
 const app = express();
 
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
-
-
+app.use("/user", userRouter)
 
 
 
 connectdb().then(() => {
 try {
-    app.listen(processs.env.PORT, () =>{
+    app.listen(process.env.PORT, () =>{
         console.log(`server running on port ${process.env.PORT}`)
     })
 } catch (err) {
