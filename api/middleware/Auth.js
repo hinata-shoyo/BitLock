@@ -1,12 +1,15 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
+require("dotenv").config()
+const app = express()
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json())
 
 const authUser = async (req, res, next) => {
   const auth = req.headers.authorization;
-  const token = auth.split(" ")[1];
-
   try {
-    const decoded = jwt.verify(token, process.env.JWT_TOKEN);
+    const token = auth.split(" ")[1];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     if (decoded) {
       req.username = decoded.username;
       next();
@@ -17,3 +20,5 @@ const authUser = async (req, res, next) => {
     res.json({ msg: "incorrect inputs" });
   }
 };
+
+module.exports = authUser

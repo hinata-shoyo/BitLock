@@ -18,10 +18,12 @@ const userSchema = new mongoose.Schema(
     firstName: {
       type: String,
       required: true,
+      default: " ",
     },
     lastName: {
       type: String,
       required: true,
+      default: " ",
     },
     role: {
       type: String,
@@ -30,38 +32,16 @@ const userSchema = new mongoose.Schema(
     },
     profilePicture: {
       type: String,
+      default:null
     },
+    documents:[{type:String}]
   },
   {
     versionKey: false,
   }
 );
 
-const documentSchema = new mongoose.Schema(
-  {
-    title: {
-      type: String,
-      required: true,
-    },
-    description: {
-      tyep: String,
-    },
-    fileUrl: {
-      type: String,
-      required: true,
-    },
-    uploadedBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
-  },
-  {
-    versionKey: false,
-  }
-);
+
 
 const User = mongoose.model("User", userSchema);
-const Document = mongoose.model("Document", documentSchema);
-
-module.exports = { connectdb, User, Document };
+module.exports = { connectdb, User};

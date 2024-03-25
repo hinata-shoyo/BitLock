@@ -1,13 +1,33 @@
-const express = require("express");
-const authUser = require("../middleware/Auth.js");
-const Router = express.Router();
+// const express = require("express");
+// const authUser = require("../middleware/Auth.js");
+// const Router = express.Router();
+// const {connectdb} = require("../db/config.js");
+// const { Document } = require("../db/config.js");
+// const mongoose = require("mongoose");
 
-const { Document } = require("../db/config.js")
+// Router.get("/", authUser, (req, res) => {});
 
-Router.get("/", authUser, (req, res) => {});
+// Router.post("/upload", authUser, upload.single("file"), async (req, res) => {
+//   const file = req.file;
 
-Router.post("/upload", authUser, (req, res) => {});
+//   if (!file) {
+//     res.status(400).json({ msg: "no file uploaded" });
+//   }
 
-Router.get("/:id", authUser, (req, res) => {});
+//   const writeStream = gfs.createWriteStream({ filename: file.originalname });
 
-Router.get("/", authUser, (req, res) => {});
+//   writeStream.write(file.buffer);
+//   writeStream.on("close", (file) => {
+//     res
+//       .status(200)
+//       .json({ msg: "file uploaded successfully", fileId: file._id });
+//   });
+//   writeStream.on("error", (err) => {
+//     console.error("error uploading the file");
+//   });
+//   writeStream.end();
+// });
+
+// Router.get("/:id", authUser, (req, res) => {});
+
+// module.exports = Router;

@@ -3,11 +3,11 @@ const Router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const authUser = require("../middleware/Auth.js");
+const upload = require("../middleware/profilePic.js");
 const { User } = require("../db/config.js");
 
 Router.post("/signup", async (req, res) => {
-  const { username, password, role, firstName, lastName, profilePicture } =
-    req.body;
+  const { username, password, role } = req.body;
   const user = await User.findOne({ username });
 
   if (user) {
@@ -19,9 +19,6 @@ Router.post("/signup", async (req, res) => {
       username,
       password: hashedPass,
       role,
-      firstName,
-      lastName,
-      profilePicture,
     });
     res.json({ msg: "user created successfully" });
   }
@@ -42,10 +39,42 @@ Router.post("/login", async (req, res) => {
   }
 });
 
-Router.post("/logout",authUser, (req, res) => {
+Router.post("/uploadPic", authUser, upload.single("file"), async (req, res) => {
+  const file = req.file;
+  const user = await User.findOneAndUpdate(
+    { username: req.username },
+    { profilePicture: file.filename },
+    {new:true, runValidators:true}
+  );
+  user
+    .save()
+    .then((data) => {
+      res.json({msg:"uploaded successfully", data });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+Router.put("/uploadName", authUser, async (req, res) => {
+  const { firstName, lastName } = req.body;
+  const user = await User.findOneAndUpdate(
+    { username: req.username },
+    { firstName, lastName },
+    {new:true, runValidators:true}
+  );
+  user
+    .save()
+    .then(res.json({msg:"updated successfully"}))
+    .catch((e) => {
+      console.log("operation failed");
+    });
+});
+
+Router.post("/logout", authUser, (req, res) => {
   res.json({
-    msg:"Logout successful"
-  })
+    msg: "Logout successful",
+  });
 });
 
 module.exports = Router;
