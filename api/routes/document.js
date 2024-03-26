@@ -1,33 +1,48 @@
-// const express = require("express");
-// const authUser = require("../middleware/Auth.js");
-// const Router = express.Router();
-// const {connectdb} = require("../db/config.js");
-// const { Document } = require("../db/config.js");
-// const mongoose = require("mongoose");
+const express = require("express");
+const authUser = require("../middleware/Auth.js");
+const Router = express.Router();
+const {initializeApp} = require("firebase/app")
+const {ref, getStorage, getDownloadURL, uploadBytesResumable} = require("firebase/storage")
+const firebaseConfig = require("../firebase/cloud.js");
+const multer = require("multer");
+const { User } = require("../db/config.js");
+require("dotenv").config();
 
-// Router.get("/", authUser, (req, res) => {});
+const app = initializeApp(firebaseConfig)
 
-// Router.post("/upload", authUser, upload.single("file"), async (req, res) => {
-//   const file = req.file;
+const storage = getStorage(app)
+const upload = multer({storage:multer.memoryStorage()})
 
-//   if (!file) {
-//     res.status(400).json({ msg: "no file uploaded" });
-//   }
+const giveCurrentDateTime = () => {
+  const today = new Date();
+  const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+  const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  const dateTime = date + ' ' + time;
+  return dateTime;
+}
 
-//   const writeStream = gfs.createWriteStream({ filename: file.originalname });
+Router.get("/", authUser, (req, res) => {});
 
-//   writeStream.write(file.buffer);
-//   writeStream.on("close", (file) => {
-//     res
-//       .status(200)
-//       .json({ msg: "file uploaded successfully", fileId: file._id });
-//   });
-//   writeStream.on("error", (err) => {
-//     console.error("error uploading the file");
-//   });
-//   writeStream.end();
-// });
+Router.put("/upload", authUser, upload.single("file"), async (req, res) => {
+  const dateTime = giveCurrentDateTime()
+  const storageRef = ref(storage, `files/${req.file.originalname + '   ' + dateTime}`)
 
-// Router.get("/:id", authUser, (req, res) => {});
+  const metadata = {
+    contentType: req.file.mimetype
+  }
 
-// module.exports = Router;
+  const snapshot = await uploadBytesResumable(storageRef, req.file.buffer, metadata)
+  const downloadUrl = await getDownloadURL(snapshot.ref)
+  const userr = await User.findOne({username:req.username})
+  const newDocs = [...userr.documents, downloadUrl]
+  const user = await User.findOneAndUpdate({username:req.username},{documents:newDocs})
+  user.save().then(
+    res.json({msg:"successfully uploaded", data : { name: req.file.originalname, type: req.file.mimetype, downloadUrl}})
+    ).catch((e) => {
+      console.log(e)
+    })
+});
+
+Router.get("/:id", authUser, (req, res) => {});
+
+module.exports = Router;

@@ -3,22 +3,14 @@ require("dotenv").config();
 const userRouter = require("./routes/user");
 const docRouter = require("./routes/document.js");
 const { connectdb } = require("./db/config");
-const Grid = require("gridfs-stream");
-
+const cors = require("cors")
 const app = express();
-const mongoose = require("mongoose");
 
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/user", userRouter);
-// app.use("/doc", docRouter);
-
-// let gfs;
-// connectdb.once("open", () => {
-//   gfs = Grid(connectdb.db, mongoose.mongo);
-//   gfs.collection("uploads");
-// });
-
+app.use("/doc", docRouter);
 
 const start = async() =>{
   try {
