@@ -25,11 +25,6 @@ const userSchema = new mongoose.Schema(
       required: true,
       default: " ",
     },
-    role: {
-      type: String,
-      enum: ["student", "faculty"],
-      default: "student",
-    },
     profilePicture: {
       type: String,
       default:null
