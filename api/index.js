@@ -12,6 +12,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/user", userRouter);
 app.use("/doc", docRouter);
 
+app.get("/", (req, res) => {
+  res.json({msg:"success"})
+})
+
 const start = async() =>{
   try {
     const conn =  connectdb()
