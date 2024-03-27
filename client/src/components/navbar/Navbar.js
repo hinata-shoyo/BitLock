@@ -41,8 +41,12 @@ const Navbar = () => {
             <p><a href="#footer">CONTACT</a></p>
           </div>
           <div className="bit__navbar-menu_container-links-sign">
+            <Link to="/signin">
             <p>Sign in</p>
+            </Link>
+            <Link to="/signup">
             <button type="button">Sign up</button>
+            </Link>
           </div>
         </div>
         )}
