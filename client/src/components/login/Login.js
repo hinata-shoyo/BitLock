@@ -1,10 +1,12 @@
 import React from "react";
 import * as Components from "./comps";
 import axios from "axios";
-import { useHref, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Alert from "./Alert";
+import LoadingOverlay from "./loading";
 
 const Login = () => {
+  const [isLoading, setIsLoading] = React.useState(false);
   const [signIn, toggle] = React.useState(true);
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -12,6 +14,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleSignin = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     try {
       const response = await axios.post(
@@ -25,16 +28,18 @@ const Login = () => {
       const token = response.data.token;
       localStorage.setItem("token", token);
       navigate("/");
+      setIsLoading(false);
     } catch (error) {
       setError(error.response.data.msg);
-      // console.log(error.response.data)
       setTimeout(() => {
         window.location.reload();
+        setIsLoading(false);
       }, 1500);
     }
   };
 
   const handleSignup = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     try {
       const response = await axios.post(
@@ -45,17 +50,20 @@ const Login = () => {
         }
       );
       console.log(response.data);
+      navigate("/");
+      setIsLoading(false);
     } catch (error) {
       setError(error.response.data.msg);
       setTimeout(() => {
         window.location.reload();
         navigate("/signup");
+        setIsLoading(false);
       }, 1500);
     }
   };
 
   return (
-    <Components.bodyy>
+    <Components.Bodyy>
       <Components.Container>
         <Components.SignUpContainer signinIn={signIn}>
           <Components.Form>
@@ -77,6 +85,7 @@ const Login = () => {
             <Components.Button onClick={handleSignup}>
               Sign Up
             </Components.Button>
+            {isLoading && <LoadingOverlay />}
             <Alert message={error} />
           </Components.Form>
         </Components.SignUpContainer>
@@ -103,6 +112,7 @@ const Login = () => {
             <Components.Button onClick={handleSignin}>
               Sign In
             </Components.Button>
+            {isLoading && <LoadingOverlay />}
             <Alert message={error} />
           </Components.Form>
         </Components.SignInContainer>
@@ -131,7 +141,7 @@ const Login = () => {
           </Components.Overlay>
         </Components.OverlayContainer>
       </Components.Container>
-    </Components.bodyy>
+    </Components.Bodyy>
   );
 };
 
