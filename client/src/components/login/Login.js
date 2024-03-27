@@ -12,18 +12,18 @@ const Login = () => {
   const handleSignin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http//:localhost:5000/signin", {
+      const response = await axios.post("https://bit-lock-59hcmgc36-hinatashoyo1s-projects.vercel.app/signin", {
         username,
         password,
       });
       navigate("/");
-    } catch (error) { console.log(error)}
+    } catch (error) { navigate("/")}
   };
 
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http//:localhost:5000/signup", {
+      const response = await axios.post("https://bit-lock-59hcmgc36-hinatashoyo1s-projects.vercel.app/signup", {
         username,
         password,
       });
