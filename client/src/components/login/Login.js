@@ -12,7 +12,7 @@ const Login = () => {
   const handleSignin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://bit-lock-g5oz6lwht-hinatashoyo1s-projects.vercel.app/user/login", {
+      const response = await axios.get("https://bit-lock-c1i9wnz5u-hinatashoyo1s-projects.vercel.app/", {
         username,
         password,
       });
