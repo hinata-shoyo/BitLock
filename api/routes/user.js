@@ -6,6 +6,10 @@ const authUser = require("../middleware/Auth.js");
 const upload = require("../middleware/profilePic.js");
 const { User } = require("../db/config.js");
 
+Router.get("/", (req, res) => {
+  res.json({msg:"success"})
+})
+
 Router.post("/signup", async (req, res) => {
   const { username, password, role } = req.body;
   const user = await User.findOne({ username });
