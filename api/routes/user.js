@@ -7,8 +7,7 @@ const upload = require("../middleware/profilePic.js");
 const { User } = require("../db/config.js");
 
 
-Router.post("/signup", async (req, res) => {
-  const { username, password, role } = req.body;
+Router.post("/signup", async (req, res) => {  const { username, password, role } = req.body;
   const user = await User.findOne({ username });
 
   if (user) {
@@ -32,6 +31,7 @@ Router.post("/login", async (req, res) => {
     const isUser = await bcrypt.compare(password, user.password);
     if (!isUser) {
       res.status(403).json({ msg: "wrong password" });
+      return
     }
     const token = jwt.sign({ username }, process.env.JWT_SECRET);
     res.json({ token });

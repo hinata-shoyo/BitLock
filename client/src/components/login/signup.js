@@ -2,38 +2,55 @@ import React from "react";
 import * as Components from "./comps";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Alert from "./Alert";
 
 const Signup = () => {
   const [signIn, toggle] = React.useState(false);
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [error, setError] = React.useState("");
   const navigate = useNavigate();
 
   const handleSignin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://bit-lock-59hcmgc36-hinatashoyo1s-projects.vercel.app/user/login", {
-        username,
-        password,
-      });
-      console.log(response)
+      const response = await axios.post(
+        "https://bit-lock.vercel.app/user/login",
+        {
+          username,
+          password,
+        }
+      );
+      console.log(response.data.token);
+      const token = response.data.token;
+      localStorage.setItem("token", token);
       navigate("/");
-    } catch (error) { console.log(error)
-      navigate("/")}
+    } catch (error) {
+      setError(error.response.data.msg);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+    }
   };
 
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://bit-lock-59hcmgc36-hinatashoyo1s-projects.vercel.app/user/signup", {
-        username,
-        password,
-      });
-      console.log(response)
-      navigate("/");
-    } catch (error) {
-      console.log(error)
-      navigate("/", { replace: true });
+      const response = await axios.post(
+        "https://bit-lock.vercel.app/user/signup",
+        {
+          username,
+          password,
+        }
+        );
+        console.log(response.data);
+        navigate("/");
+      } catch (error) {
+        setError(error.response.data.msg);
+        setTimeout(() => {
+          window.location.reload();
+          navigate("/signin", {replace:true})
+      }, 1500);
     }
   };
 
@@ -60,6 +77,7 @@ const Signup = () => {
             <Components.Button onClick={handleSignup}>
               Sign Up
             </Components.Button>
+            <Alert message={error} />
           </Components.Form>
         </Components.SignUpContainer>
 
@@ -82,7 +100,10 @@ const Signup = () => {
                 setPassword(e.target.value);
               }}
             />
-            <Components.Button onClick={handleSignin} >Sigin In</Components.Button>
+            <Components.Button onClick={handleSignin}>
+              Sign In
+            </Components.Button>
+            <Alert message={error} />
           </Components.Form>
         </Components.SignInContainer>
 
@@ -115,5 +136,3 @@ const Signup = () => {
 };
 
 export default Signup;
-
-

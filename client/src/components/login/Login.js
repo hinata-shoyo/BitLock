@@ -1,41 +1,56 @@
 import React from "react";
 import * as Components from "./comps";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useHref, useNavigate } from "react-router-dom";
+import Alert from "./Alert";
 
 const Login = () => {
   const [signIn, toggle] = React.useState(true);
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [error, setError] = React.useState("");
   const navigate = useNavigate();
 
   const handleSignin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get("https://bit-lock-c1i9wnz5u-hinatashoyo1s-projects.vercel.app/", {
-        username,
-        password,
-      });
-      console.log(response.data)
-      const token =response.data.token
-      localStorage.setItem('token', token)
+      const response = await axios.post(
+        "https://bit-lock.vercel.app/user/login",
+        {
+          username,
+          password,
+        }
+      );
+      console.log(response.data);
+      const token = response.data.token;
+      localStorage.setItem("token", token);
       navigate("/");
-    } catch (error) { 
-      console.log(error)}
+    } catch (error) {
+      setError(error.response.data.msg);
+      // console.log(error.response.data)
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+    }
   };
 
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://bit-lock-g5oz6lwht-hinatashoyo1s-projects.vercel.app/user/signup", {
-        username,
-        password,
-      });
-      console.log(response.data)
-      navigate("/");
+      const response = await axios.post(
+        "https://bit-lock.vercel.app/user/signup",
+        {
+          username,
+          password,
+        }
+      );
+      console.log(response.data);
     } catch (error) {
-      console.log(error)
-      navigate("/", { replace: true });
+      setError(error.response.data.msg);
+      setTimeout(() => {
+        window.location.reload();
+        navigate("/signup");
+      }, 1500);
     }
   };
 
@@ -62,6 +77,7 @@ const Login = () => {
             <Components.Button onClick={handleSignup}>
               Sign Up
             </Components.Button>
+            <Alert message={error} />
           </Components.Form>
         </Components.SignUpContainer>
 
@@ -84,7 +100,10 @@ const Login = () => {
                 setPassword(e.target.value);
               }}
             />
-            <Components.Button onClick={handleSignin} >Sigin In</Components.Button>
+            <Components.Button onClick={handleSignin}>
+              Sign In
+            </Components.Button>
+            <Alert message={error} />
           </Components.Form>
         </Components.SignInContainer>
 
