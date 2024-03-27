@@ -12,23 +12,29 @@ const Login = () => {
   const handleSignin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://bit-lock-59hcmgc36-hinatashoyo1s-projects.vercel.app/signin", {
+      const response = await axios.post("https://bit-lock-g5oz6lwht-hinatashoyo1s-projects.vercel.app/user/login", {
         username,
         password,
       });
+      console.log(response.data)
+      const token =response.data.token
+      localStorage.setItem('token', token)
       navigate("/");
-    } catch (error) { navigate("/")}
+    } catch (error) { 
+      console.log(error)}
   };
 
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://bit-lock-59hcmgc36-hinatashoyo1s-projects.vercel.app/signup", {
+      const response = await axios.post("https://bit-lock-g5oz6lwht-hinatashoyo1s-projects.vercel.app/user/signup", {
         username,
         password,
       });
+      console.log(response.data)
       navigate("/");
     } catch (error) {
+      console.log(error)
       navigate("/", { replace: true });
     }
   };
