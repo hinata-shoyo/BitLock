@@ -10,7 +10,7 @@ const Header = (props) => {
   const [name, setName] = useState('')
   const [isVisible, setIsVisible] = useState(false)
   const getName = async () => {
-    const response = await axios.get("http://localhost:5000/doc/")
+    const response = await axios.get("https://bit-lock.vercel.app/doc")
     const name = `${response.data.firstName} ${response.data.lastName}`
     setName(name)
   }
