@@ -27,7 +27,7 @@ const Signup = () => {
       console.log(response.data.token);
       const token = response.data.token;
       localStorage.setItem("token", token);
-      navigate("/");
+      navigate("/dashboard");
       setIsLoading(false);
     } catch (error) {
       setError(error.response.data.msg);
@@ -50,7 +50,7 @@ const Signup = () => {
         }
       );
       console.log(response.data);
-      navigate("/");
+      handleSignin();
       setIsLoading(false);
     } catch (error) {
       setError(error.response.data.msg);

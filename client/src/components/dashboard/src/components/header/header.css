@@ -1,0 +1,94 @@
+.bit_dash{
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+}
+
+.bit_dash h1{
+    font-size: 60px;
+    color: white;
+}
+
+.bit_dash_box{
+    display: flex;
+    background-color: #9ADAEE;
+    padding: 10px;
+    border-radius: 20px;
+    margin-right: 50px;
+    margin-top: 20px;
+}
+
+.bit_dash_image{
+    display: flex;
+    height: 120px;
+    width: 120px;
+    margin-top: 20px;
+}
+
+.bit_dash_name{
+    display: flex;
+    margin-top: 60px;
+    font-size: 30px;
+    margin-left: 20px;
+}
+
+.bit_dash_btn button{
+    display: flex;
+    margin-left: 870px;
+    background-color: orangered;
+    margin-top: 60px;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    color: white;
+}
+
+@media screen and (max-width: 1300px) {
+    .bit_dash{
+        display: flex;
+        flex-direction: column;
+        margin-right: 20px;
+    }
+    .bit_dash_name{
+        margin-right: -20px;
+    }
+    .bit_dash_btn{
+        margin-left: -500px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .bit_dash{
+        display: flex;
+        flex-direction: column;
+        margin-right: 20px;
+    }
+    .bit_dash_name{
+        margin-right: -20px;
+        margin-top: 20px;
+    }
+    .bit_dash_btn{
+        margin-left: -800px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .bit_dash{
+        display: flex;
+        flex-direction: column;
+        margin-right: 20px;
+        margin-left: 10px;
+    }
+    .bit_dash_name{
+        margin-right: -25px;
+        margin-top: 20px;
+    }
+    .bit_dash_btn{
+        margin-left: -800px;
+    }
+    .bit_dash_box{
+        margin-right: -20px;
+        margin-left: -5px;
+        padding: 5px
+    }
+}

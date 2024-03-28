@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Footer, Possibility, Feature, Whatbit, Header } from "./containers";
-import { Brand, Navbar, Login } from "./components";
+import { Brand, Navbar, Login, Signup, Dashboard } from "./components";
 import "./App.css";
-import Signup from "./components/login/signup";
+
 
 const Homepage = () => {
   return (
@@ -21,6 +21,8 @@ const Homepage = () => {
   );
 };
 
+
+
 const App = () => {
   return (
     <div className="App">
@@ -29,6 +31,7 @@ const App = () => {
           <Route path="/" element={<Homepage />} />
           <Route path="/signin" element={<Login/>}/>
           <Route path="/signup" element={<Signup/>}/>
+          <Route path="/dashboard" element={<Dashboard token={localStorage.getItem('token')} />} />
         </Routes>
       </Router>
     </div>

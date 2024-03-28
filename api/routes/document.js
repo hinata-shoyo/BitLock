@@ -2,7 +2,7 @@ const express = require("express");
 const authUser = require("../middleware/Auth.js");
 const Router = express.Router();
 const {initializeApp} = require("firebase/app")
-const {ref, getStorage, getDownloadURL, uploadBytesResumable} = require("firebase/storage")
+const {ref, getStorage, getDownloadURL, uploadBytesResumable, deleteObject} = require("firebase/storage")
 const firebaseConfig = require("../firebase/cloud.js");
 const multer = require("multer");
 const { User } = require("../db/config.js");
@@ -21,7 +21,14 @@ const giveCurrentDateTime = () => {
   return dateTime;
 }
 
-Router.get("/", authUser, (req, res) => {});
+Router.get("/check", authUser, (req, res) => {
+  res.json({msg:true})
+})
+
+Router.get("/", authUser, async (req, res) => {
+  const user = await User.findOne({username:req.username})
+  res.json(user)
+});
 
 Router.put("/upload", authUser, upload.single("file"), async (req, res) => {
   const dateTime = giveCurrentDateTime()
@@ -34,7 +41,7 @@ Router.put("/upload", authUser, upload.single("file"), async (req, res) => {
   const snapshot = await uploadBytesResumable(storageRef, req.file.buffer, metadata)
   const downloadUrl = await getDownloadURL(snapshot.ref)
   const userr = await User.findOne({username:req.username})
-  const newDocs = [...userr.documents, downloadUrl]
+  const newDocs = [...userr.documents, {title:req.body.title, link:downloadUrl}]
   const user = await User.findOneAndUpdate({username:req.username},{documents:newDocs})
   user.save().then(
     res.json({msg:"successfully uploaded", data : { name: req.file.originalname, type: req.file.mimetype, downloadUrl}})
@@ -43,6 +50,13 @@ Router.put("/upload", authUser, upload.single("file"), async (req, res) => {
     })
 });
 
-Router.get("/:id", authUser, (req, res) => {});
+Router.delete("/:id", authUser, async (req, res) => {
+  const user = await User.findOne({username:req.username})
+  const docs = user.documents
+  const index = req.params.id
+  docs.splice(index,1)
+  await user.updateOne({documents:docs})
+  res.json({user})
+});
 
 module.exports = Router;

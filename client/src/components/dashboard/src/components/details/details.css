@@ -1,0 +1,107 @@
+.bit_details{
+    display: flex;
+    margin-left: 50px;
+    margin-top: 30px;
+}
+
+.bit_details_box{
+    display: flex;
+    background-color: #9ADAEE;
+    padding: 10px;
+    border-radius: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    flex-direction: column;
+}
+
+.bit_details_box h2{
+    font-size: 50px;
+}
+
+
+.bit_details_name1{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.bit_details_name1_box1{
+    background-color: black;
+    color:white;
+    padding: 20px;
+    font-size: 25px;
+    border-radius: 30px;
+}
+
+.bit_details_name1_box2{
+    background-color: black;
+    color:white;
+    padding: 20px;
+    font-size: 25px;
+    border-radius: 30px;
+    margin-left: 280px;
+    margin-right: 20px;
+}
+
+.bit_details_name2{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.bit_details_name2_box1{
+    background-color: black;
+    color:white;
+    padding: 20px;
+    font-size: 25px;
+    border-radius: 30px;
+}
+
+.bit_details_name2_box2{
+    background-color: black;
+    color:white;
+    padding: 20px;
+    font-size: 25px;
+    border-radius: 30px;
+    margin-left: 465px;
+    margin-right: 20px;
+}
+@media screen and (max-width:1500px) {
+    .bit_details_box{
+        flex-direction: column;
+        margin-right: 200px;
+    }
+}
+
+@media screen and (max-width:750px) {
+    .bit_details_box{
+        flex-direction: column;
+        padding: 20px 40px 20px 40px;
+        margin-left: -40px;
+    }
+    .bit_details_box h2{
+        font-size: 35px;
+        margin-left: -20px;
+    }
+    .bit_details_name1{
+        flex-direction: column;
+        padding: 2px;
+        margin-left: -20px;
+    }
+    .bit_details_name1_box2{
+        margin-right: 10px;
+        margin-left: 1px;
+        margin-top: 20px;
+    }
+    .bit_details_name2{
+        flex-direction: column;
+        margin-left: -20px;
+    }
+    .bit_details_name2_box2{
+        margin-right: 10px;
+        margin-left: 1px;
+        margin-top: 20px;
+    }
+}

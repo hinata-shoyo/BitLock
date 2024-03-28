@@ -17,26 +17,27 @@ const userSchema = new mongoose.Schema(
     },
     firstName: {
       type: String,
-      required: true,
       default: " ",
     },
     lastName: {
       type: String,
-      required: true,
       default: " ",
     },
     profilePicture: {
       type: String,
-      default:null
+      default: null,
     },
-    documents:[{type:String}]
+    documents: [
+      {
+        title: { type: String },
+        link: { type: String },
+      },
+    ],
   },
   {
     versionKey: false,
   }
 );
 
-
-
 const User = mongoose.model("User", userSchema);
-module.exports = { connectdb, User};
+module.exports = { connectdb, User };
