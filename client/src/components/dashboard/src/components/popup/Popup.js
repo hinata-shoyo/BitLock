@@ -16,7 +16,7 @@ function Popup() {
     await axios.put("https://bit-lock.vercel.app/user/uploadName",
       {
         headers:{
-            "Authorization": `bearer ${localStorage.getItem('token')}`
+            "Authorization": `Bearer ${localStorage.getItem('token')}`
         }
       }, {
         firstName: input1,
