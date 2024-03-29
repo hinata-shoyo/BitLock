@@ -12,7 +12,6 @@ const Header = (props) => {
   const [isVisible, setIsVisible] = useState(false)
   const getName = async () => {
     const response = await axios.get("https://bit-lock.vercel.app/doc" , {headers: {"Authorization" : `bearer ${window.localStorage.getItem('token')}`}})
-    // console.log(response.data)
     const name = `${response.data.firstName} ${response.data.lastName}`
     setName(name)
     setFile(response.data.profilePicture)
