@@ -44,8 +44,8 @@ const Header = (props) => {
     <div className="bit_dash" id="home">
       <h1>DASHBOARD</h1>
       <div className="bit_dash_box">
-        <div className="bit_dash_image">
-          <img src={`https://bit-lock.vercel.app/${file}`} />
+        <div >
+          <img className="bit_dash_image" src={`https://bit-lock.vercel.app/${file}`} srcSet={dp} />
         </div>
         <div className="bit_dash_name">
           <h3>{`Welcome, ${name}`}</h3>

@@ -23,6 +23,8 @@
     height: 120px;
     width: 120px;
     margin-top: 20px;
+    border: 1px solid black;
+    border-radius: 50%;
 }
 
 .bit_dash_name{

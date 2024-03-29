@@ -25,7 +25,7 @@ function Popup() {
         },
       }
     );
-    await axios.post("https://bit-lock.vercel.app/user/upload", formData, {
+    const resp = await axios.post("https://bit-lock.vercel.app/user/upload", formData, {
       headers: {
         Authorization: `bearer ${window.localStorage.getItem("token")}`,
         "Content-Type": "multipart/form-data"
@@ -41,7 +41,7 @@ function Popup() {
 
   return (
     <div className="popup">
-      {/* <form encType="multipart/form-data" onSubmit={handleSubmit}> */}
+      <form encType="multipart/form-data" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="First Name"
@@ -60,8 +60,8 @@ function Popup() {
           onChange={(e) => setFile(e.target.files[0])}
         />
 
-        <button type="submit" onClick={handleSubmit}>Submit</button>
-      {/* </form> */}
+        <button type="submit">Submit</button>
+      </form>
     </div>
   );
 }
