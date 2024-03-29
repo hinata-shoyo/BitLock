@@ -5,11 +5,12 @@
     margin-bottom: 50px;
 }
 
-.bit_dash_btn button{
+.bit_dash_btnn button{
     display: flex;
-    margin-left: 870px;
+    margin-left: 70%;
+    /* margin-bottom: 50%; */
     background-color: orangered;
-    margin-top: 60px;
+    margin-top: 20px;
     border: none;
     border-radius: 10px;
     padding: 12px;
@@ -161,3 +162,6 @@
         margin-left: 20px;
     }
 }
+
+
+
