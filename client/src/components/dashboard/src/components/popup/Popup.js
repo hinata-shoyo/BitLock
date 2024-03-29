@@ -11,7 +11,6 @@ function Popup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(file)
     const formData = new FormData()
     formData.append('file',file)
     // console.log(formData)
