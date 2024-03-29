@@ -14,7 +14,7 @@ const Header = (props) => {
   const getName = async () => {
     setIsVisible(false)
     try {
-      const response = await axios.get("http://localhost:5000/doc" , {headers: {"Authorization" : `bearer ${window.localStorage.getItem('token')}`}})
+      const response = await axios.get("https://bit-lock.vercel.app/doc" , {headers: {"Authorization" : `bearer ${window.localStorage.getItem('token')}`}})
     const name = `${response.data.firstName} ${response.data.lastName}`
     // console.log(response)
     setName(name)
@@ -47,7 +47,7 @@ const Header = (props) => {
       <h1>DASHBOARD</h1>
       <div className='bit_dash_box'>
         <div className='bit_dash_image'>
-          <img src={`http://localhost:5000/${file}`} />
+          <img src={`https://bit-lock.vercel.app/${file}`} />
         </div>
         <div className='bit_dash_name'>
           <h3>{`Welcome, ${name}`}</h3>
