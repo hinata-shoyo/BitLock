@@ -3,44 +3,59 @@ import './storage.css'
 import document from '../../assets/document.svg'
 // import folder from '../../assets/folder.svg'
 // import pdf from '../../assets/pdf.svg'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import Docum from './Docum'
+import Popup2 from '../popup/Popup2'
+
 
 const Storage = () => {
-  return (
+  const [isVisible, setIsVisible] = useState(false);
+const [docs, setDocs] = useState([])
+const getArray = async () => {
+  const response = await axios.get("https://bit-lock.vercel.app/doc", {
+    headers:{
+      Authorization: `bearer ${window.localStorage.getItem('token')}`
+    }
+  })
+  
+// this.setDocs({ 
+//   arrayvar: this.Docs.arrayvar.concat(response.data.documents)
+// })
+
+
+  setDocs(response.data.documents)  
+  console.log(docs)
+  console.log(response.data.documents)
+}
+
+useEffect(() => {
+  setIsVisible(false)
+  getArray()
+}, [])
+
+const handlePopup = () => {
+  setIsVisible(!isVisible);
+};
+
+  return(
+    
     <div className='bit_storage' id='storage'>
-      <div className='bit_storage_bigbox'>
-        <h2>STORAGE AREA</h2>
-        <div className='bit_storage_smallbox1'>
-          <a href="#home">
-          <img src={document} alt='folder'/>
-          <h3>DOCUMENT</h3>
-          <div className='bit_storage_smallbox1_bottom1'>
-            <h5>Delete File</h5>
-            <h6>120 MB</h6>
-          </div>
-          </a>
+          <div className='bit_storage_bigbox'>
+            <h2>STORAGE AREA</h2>
+            <div className="bit_dash_btn">
+          <button onClick={handlePopup}>ADD</button>
+          {isVisible && <Popup2 />}
         </div>
-        <div className='bit_storage_smallbox2'>
-          <a href="#home">
-          <img src={document} alt="document"/>
-          <h3>DOCUMENT</h3>
-          <div className='bit_storage_smallbox2_bottom2'>
-            <h5>Delete File</h5>
-            <h6>120 MB</h6>
+            {docs.map((docs) => {
+        <Docum 
+        title={docs.title}
+        id={docs._id}
+        link={docs.link} />
+      })}
           </div>
-          </a>
         </div>
-        <div className='bit_storage_smallbox3'>
-          <a href="#home">
-          <img src={document} alt='pdf'/>
-          <h3>DOCUMENT</h3>
-          <div className='bit_storage_smallbox1_bottom3'>
-            <h5>Delete File</h5>
-            <h6>120 MB</h6>
-          </div>
-          </a>
-        </div>
-      </div>
-    </div>
+      
   )
 }
 

@@ -30,8 +30,9 @@ Router.get("/", authUser, async (req, res) => {
   res.json(user)
 });
 
-Router.put("/upload", authUser, upload.single("file"), async (req, res) => {
+Router.post("/upload", authUser, upload.single('file'), async (req, res) => {
   const dateTime = giveCurrentDateTime()
+  console.log(req.body.title)
   const storageRef = ref(storage, `files/${req.file.originalname + '   ' + dateTime}`)
 
   const metadata = {

@@ -6,6 +6,11 @@ import './navbar.css';
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
 
+const logout = () => {
+  window.localStorage.removeItem('token')
+  window.location.href ="/"
+}
+
   return (
     <div className="bit__navbar">
       <div className="bit__navbar-links">
@@ -20,7 +25,7 @@ const Navbar = () => {
         </div>
       </div>
       <div className="bit__navbar-sign">
-        <button type="button">Log Out</button>
+        <button type="button" onClick={logout}>Log Out</button>
       </div>
       <div className="bit__navbar-menu">
         {toggleMenu
@@ -35,7 +40,7 @@ const Navbar = () => {
             <p><a href="#footer">CONTACT</a></p>
           </div>
           <div className="bit__navbar-menu_container-links-sign">
-            <button type="button">Log Out</button>
+            <button type="button" onClick={logout}>Log Out</button>
           </div>
         </div>
         )}

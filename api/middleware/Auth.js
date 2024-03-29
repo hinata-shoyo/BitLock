@@ -12,6 +12,7 @@ const authUser = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     if (decoded) {
       req.username = decoded.username;
+      console.log("here")
       next();
     } else {
       res.status(403).json({ msg: "user not authenticated" });

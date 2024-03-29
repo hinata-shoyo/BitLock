@@ -5,6 +5,17 @@
     margin-bottom: 50px;
 }
 
+.bit_dash_btn button{
+    display: flex;
+    margin-left: 870px;
+    background-color: orangered;
+    margin-top: 60px;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    color: white;
+}
+
 .bit_storage_bigbox{
     display: flex;
     background-color: #9ADAEE;

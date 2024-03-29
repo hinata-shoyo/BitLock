@@ -6,7 +6,13 @@ const { connectdb } = require("./db/config");
 const cors = require("cors")
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+  origin : "*",
+  allowedHeaders: ['Authorization', 'Content-Type'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS']
+}
+
+app.use(cors(corsOptions));
 app.use(express.static(__dirname+'/uploads'))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
