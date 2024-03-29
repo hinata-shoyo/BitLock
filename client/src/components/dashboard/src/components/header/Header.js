@@ -8,15 +8,20 @@ import Popup from '../popup/Popup'
 const Header = (props) => {
 
   const [name, setName] = useState('')
+  const [file, setFile] = useState(dp)
   const [isVisible, setIsVisible] = useState(false)
   const getName = async () => {
-    const response = await axios.get("https://bit-lock.vercel.app/doc")
+    const response = await axios.get("https://bit-lock.vercel.app/doc" , {headers: {"Authorization" : `bearer ${window.localStorage.getItem('token')}`}})
+    // console.log(response.data)
     const name = `${response.data.firstName} ${response.data.lastName}`
     setName(name)
+    setFile(response.data.profilePicture)
   }
 
   useEffect(() => {
+    setIsVisible(false)
     getName()
+    console.log(file)
   }, [])
 
   const handlePopup = () => {
@@ -28,7 +33,7 @@ const Header = (props) => {
       <h1>DASHBOARD</h1>
       <div className='bit_dash_box'>
         <div className='bit_dash_image'>
-          <img src={dp} alt="dp"/>
+          <img src={`https://bit-lock.vercel.app/${file}`} alt="dp"/>
         </div>
         <div className='bit_dash_name'>
           <h3>{`Welcome, ${name}`}</h3>

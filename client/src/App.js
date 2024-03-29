@@ -31,7 +31,7 @@ const App = () => {
           <Route path="/" element={<Homepage />} />
           <Route path="/signin" element={<Login/>}/>
           <Route path="/signup" element={<Signup/>}/>
-          <Route path="/dashboard" element={<Dashboard token={localStorage.getItem('token')} />} />
+          <Route path="/dashboard" element={<Dashboard token={window.localStorage.getItem('token')} />} />
         </Routes>
       </Router>
     </div>

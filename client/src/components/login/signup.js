@@ -26,7 +26,7 @@ const Signup = () => {
       );
       console.log(response.data.token);
       const token = response.data.token;
-      localStorage.setItem("token", token);
+      window.localStorage.setItem("token", token);
       navigate("/dashboard");
       setIsLoading(false);
     } catch (error) {
