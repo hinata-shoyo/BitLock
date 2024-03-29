@@ -14,10 +14,10 @@ function Popup() {
     const formData = new FormData()
     formData.append('file',file)
     console.log(formData)
-    await axios.put("https://bit-lock.vercel.app/user/uploadName",
+    const response = await axios.put("https://bit-lock.vercel.app/user/uploadName",
       {
         headers:{
-            "Authorization": `Bearer ${window.localStorage.getItem('token')}`
+            "Authorization": `bearer ${window.localStorage.getItem('token')}`
         }
       }, {
         firstName: input1,
@@ -25,6 +25,8 @@ function Popup() {
         // profilePicture:formData
         }
     );
+    console.log(window.localStorage.getItem('token'))
+    console.log(response.data.msg)
     // window.location.href = "/dashboard"
   };
 
