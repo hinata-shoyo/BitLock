@@ -42,10 +42,10 @@ Router.post("/login", async (req, res) => {
 
 Router.post("/upload", authUser, upload.single("file"), async (req, res) => {
   const file = req.file;
-  const { firstName, lastName } = req.body;
+  // const { firstName, lastName } = req.body;
   const user = await User.findOneAndUpdate(
     { username: req.username },
-    { profilePicture: file.filename, firstName, lastName },
+    { profilePicture: file.filename },
     {new:true, runValidators:true}
   );
   user
@@ -58,20 +58,20 @@ Router.post("/upload", authUser, upload.single("file"), async (req, res) => {
     });
 });
 
-// Router.put("/uploadName", authUser, async (req, res) => {
-//   const { firstName, lastName } = req.body;
-//   const user = await User.findOneAndUpdate(
-//     { username: req.username },
-//     { firstName, lastName },
-//     {new:true, runValidators:true}
-//   );
-//   user
-//     .save()
-//     .then(res.json({msg:"updated successfully"}))
-//     .catch((e) => {
-//       console.log("operation failed");
-//     });
-// });
+Router.put("/uploadName", authUser, async (req, res) => {
+  const { firstName, lastName } = req.body;
+  const user = await User.findOneAndUpdate(
+    { username: req.username },
+    { firstName, lastName },
+    {new:true, runValidators:true}
+  );
+  user
+    .save()
+    .then(res.json({msg:"updated successfully"}))
+    .catch((e) => {
+      console.log("operation failed");
+    });
+});
 
 Router.post("/logout", authUser, (req, res) => {
   res.json({
