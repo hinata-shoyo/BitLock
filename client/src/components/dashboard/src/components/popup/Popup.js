@@ -13,33 +13,35 @@ function Popup() {
     const formData = new FormData();
     formData.append("file", file);
     console.log(formData);
-    const response = await axios.put("https://bit-lock.vercel.app/user/uploadName", {
-          firstName:input1,
-          lastName:input2
-      },{
-        headers:{
-          Authorization : `bearer ${window.localStorage.getItem("token")}`
-        }
-      });
-      // await axios.put("http://localhost:5000/user/upload", {
-      //     formData
-      // },{
-      //   headers:{
-      //     Authorization : `bearer ${window.localStorage.getItem("token")}`
-      //   }
-      // });
-
+    const response = await axios.put(
+      "https://bit-lock.vercel.app/user/uploadName",
+      {
+        firstName: input1,
+        lastName: input2,
+      },
+      {
+        headers: {
+          Authorization: `bearer ${window.localStorage.getItem("token")}`,
+        },
+      }
+    );
+    await axios.post("https://bit-lock.vercel.app/user/upload", formData, {
+      headers: {
+        Authorization: `bearer ${window.localStorage.getItem("token")}`,
+        "Content-Type": "multipart/form-data"
+      },
+    });
 
     // console.log(window.localStorage.getItem("token"));
     console.log(response.data.msg);
-    window.location.href = "/dashboard"
+    window.location.href = "/dashboard";
   };
 
-// useEffect 
+  // useEffect
 
   return (
     <div className="popup">
-      <form encType="multipart/form-data" onSubmit={handleSubmit}>
+      {/* <form encType="multipart/form-data" onSubmit={handleSubmit}> */}
         <input
           type="text"
           placeholder="First Name"
@@ -52,14 +54,14 @@ function Popup() {
           value={input2}
           onChange={(e) => setInput2(e.target.value)}
         />
-        {/* <input
+        <input
           type="file"
           name="file"
           onChange={(e) => setFile(e.target.files[0])}
-        /> */}
+        />
 
-        <button type="submit">Submit</button>
-      </form>
+        <button type="submit" onClick={handleSubmit}>Submit</button>
+      {/* </form> */}
     </div>
   );
 }

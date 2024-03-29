@@ -40,7 +40,7 @@ Router.post("/login", async (req, res) => {
   }
 });
 
-Router.put("/upload", authUser, upload.single("file"), async (req, res) => {
+Router.post("/upload", authUser, upload.single("file"), async (req, res) => {
   const file = req.file;
   // const { firstName, lastName } = req.body;
   const user = await User.findOneAndUpdate(
