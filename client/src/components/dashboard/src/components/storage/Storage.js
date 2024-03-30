@@ -67,10 +67,10 @@ const Storage = () => {
           {isVisible && <Popup2 />}
         </div>
         
-        {docs.map((docs) => {
-        <Card title={docs.title} link={docs.link} />
-          // <Docum title={docs.title} id={docs._id} link={docs.link} />;
-        })}
+        // {docs.map((docs) => {
+        // <Card title={docs.title} link={docs.link} />
+          <Docum title={docs[0].title} id={docs[0]._id} link={docs[0].link} />;
+        // })}
       </div>
     </div>
   );
