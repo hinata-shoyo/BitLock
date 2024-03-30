@@ -66,11 +66,21 @@ const Storage = () => {
           <button onClick={handlePopup}>ADD</button>
           {isVisible && <Popup2 />}
         </div>
+  <div className='bit_storage_smallbox1'>
+              <a href={`${props.link}`}>
+              <img src={document} alt='folder'/>
+              <h3>{props.title}</h3>
+              <div className='bit_storage_smallbox1_bottom1'>
+                <h5>Delete File</h5>
+                { <h6>120 kb</h6> }
+              </div>
+              </a>
+            </div>
         
-        {docs.map((docs) => {
-        <Card title={docs.title} link={docs.link} />
-          // <Docum title={docs.title} id={docs._id} link={docs.link} />;
-        })}
+        // {docs.map((docs) => {
+        // <Card title={docs.title} link={docs.link} />
+          // <Docum title={docs[0].title} id={docs[0]._id} link={docs[0].link} />;
+        // })}
       </div>
     </div>
   );
