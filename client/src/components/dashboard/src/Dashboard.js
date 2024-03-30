@@ -28,7 +28,7 @@ const Dashboard = (props) => {
             <Navbar token={props.token}/>
             <Header token={props.token}/>
         </div>
-        {/* <Details/> */}
+        <Details/> 
         <Storage/>
         <Footer/>
     </div>
