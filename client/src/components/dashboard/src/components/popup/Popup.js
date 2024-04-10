@@ -25,12 +25,12 @@ function Popup() {
         },
       }
     );
-    // const resp = await axios.post("https://bit-lock.vercel.app/user/upload", formData, {
-    //   headers: {
-    //     Authorization: `bearer ${window.localStorage.getItem("token")}`,
-    //     "Content-Type": "multipart/form-data"
-    //   },
-    // });
+   await axios.post("https://bit-lock.vercel.app/user/upload", formData, {
+      headers: {
+        Authorization: `bearer ${window.localStorage.getItem("token")}`,
+        "Content-Type": "multipart/form-data"
+      },
+    });
 
     // console.log(window.localStorage.getItem("token"));
     console.log(response.data.msg);
@@ -54,11 +54,11 @@ function Popup() {
           value={input2}
           onChange={(e) => setInput2(e.target.value)}
         />
-        {/* <input
+        <input
           type="file"
           name="file"
           onChange={(e) => setFile(e.target.files[0])}
-        /> */}
+        />
 
         <button type="submit">Submit</button>
       </form>

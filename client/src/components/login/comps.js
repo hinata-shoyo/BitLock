@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Bodyy = styled.body`
-background: #fff;
+background: ##0c0e2b;
 display: flex;
 justify-content: center;
 align-items: center;

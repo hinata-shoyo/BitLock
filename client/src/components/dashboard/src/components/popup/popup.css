@@ -24,6 +24,8 @@
   
   .popup button {
     padding: 10px;
+    cursor: pointer;
+    margin-left: 0px;
     border: none;
     background-color: #007bff;
     color: white;

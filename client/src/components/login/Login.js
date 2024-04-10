@@ -14,8 +14,8 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleSignin = async (e) => {
-    setIsLoading(true);
     e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await axios.post(
         "https://bit-lock.vercel.app/user/login",
@@ -82,7 +82,7 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Components.Button onClick={handleSignup}>
+            <Components.Button onClick={(e) => handleSignup}>
               Sign Up
             </Components.Button>
             {isLoading && <LoadingOverlay />}

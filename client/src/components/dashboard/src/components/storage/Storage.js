@@ -1,76 +1,74 @@
-import React from "react";
+import react from "react";
 import "./storage.css";
 import document from "../../assets/document.svg";
-// import folder from '../../assets/folder.svg'
-// import pdf from '../../assets/pdf.svg'
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Docum, { Products } from "./Docum";
 import Popup2 from "../popup/Popup2";
 
 const Card = (props) => {
-  return (
-    <div className="bit_storage_smallbox1">
-          <a href={`${props.link}`}>
-            <img src={document} alt="folder" />
-            <h3>{props.title}</h3>
-            <div className="bit_storage_smallbox1_bottom1">
-              <h5>Delete File</h5>
-              <h6>120 KB</h6>
-            </div>
-          </a>
-        </div>
 
-  )
-}
+  // const handledelete = () =>{
+  //   try {
+  //     axios.delete("https://bit-lock.vercel.app/doc/delete"
+
+  //     )
+
+  //   } catch (error) {
+
+  //   }
+  // }
+
+  return (
+    <div className="bit_storage_smallbox">
+      <a href={`${props.link}`} target="_blank">
+        <img src={document} alt="folder" />
+        <h3 className="link">{props.title}</h3>
+        <div className="bit_storage_smallbox_bottom">
+          <h5 className="link">delete file</h5>
+          <h6>120 kb</h6>
+        </div>
+      </a>
+    </div>
+  );
+};
 
 const Storage = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [docs, setDocs] = useState([]);
-  // const arr = [1,2,3,4];
-  const getArray = async () => {
+  const [isvisible, setisVisible] = useState(false);
+  const [docs, setdocs] = useState([]);
+  const getarray = async () => {
     const response = await axios.get("https://bit-lock.vercel.app/doc", {
       headers: {
-        Authorization: `bearer ${window.localStorage.getItem("token")}`,
+        authorization: `bearer ${window.localStorage.getItem("token")}`,
       },
     });
-
-    // this.setDocs({
-    //   arrayvar: this.Docs.arrayvar.concat(response.data.documents)
-    // })
-
-  //  arr = response.data.documents;
-    // console.log(arr);
-    setDocs(response.data.documents);
+    setdocs(response.data.documents);
     console.log(docs);
-    // docs = response.data.documents
-    console.log(response.data);   
-    console.log(docs)
   };
 
   useEffect(() => {
-    setIsVisible(false);
-    getArray();
+    setisVisible(false);
+    getarray();
   }, []);
 
   const handlePopup = () => {
-    setIsVisible(!isVisible);
+    setisVisible(!isvisible);
   };
 
   return (
     <div className="bit_storage" id="storage">
-      {/* {getArray} */}
       <div className="bit_storage_bigbox">
-        <h2>STORAGE AREA</h2>
-        <div className="bit_dash_btnn">
-          <button onClick={handlePopup}>ADD</button>
-          {isVisible && <Popup2 />}
+        <div className="storage_title">
+          <h2>Storage Area</h2>
+          <div className="bit_dash_btnn">
+            <button onclick={handlePopup}>ADD</button>
+            {isvisible && <Popup2 />}
+          </div>
         </div>
-        
-        {docs.map((docs) => {
-        <Card title={docs.title} link={docs.link} />
-          // <Docum title={docs.title} id={docs._id} link={docs.link} />;
-        })}
+        <div className="col">
+          {docs.map((docs) => {
+            return <Card title={docs.title} link={docs.link} />;
+          })}
+        </div>
       </div>
     </div>
   );
