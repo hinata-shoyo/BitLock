@@ -39,8 +39,9 @@ const Login = () => {
   };
 
   const handleSignup = async (e) => {
-    setIsLoading(true);
     e.preventDefault();
+    // console.log("aam")
+    setIsLoading(true);
     try {
       const response = await axios.post(
         "https://bit-lock.vercel.app/user/signup",
@@ -66,7 +67,7 @@ const Login = () => {
     <Components.Bodyy>
       <Components.Container>
         <Components.SignUpContainer signinIn={signIn}>
-          <Components.Form>
+          <Components.Form onSubmit={handleSignup}>
             <Components.Title>Create Account</Components.Title>
             <Components.Input
               type="text"
@@ -82,7 +83,7 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Components.Button onClick={(e) => handleSignup}>
+            <Components.Button >
               Sign Up
             </Components.Button>
             {isLoading && <LoadingOverlay />}
@@ -91,7 +92,7 @@ const Login = () => {
         </Components.SignUpContainer>
 
         <Components.SignInContainer signinIn={signIn}>
-          <Components.Form>
+          <Components.Form onSubmit={handleSignin}>
             <Components.Title>Sign in</Components.Title>
             <Components.Input
               type="text"
@@ -109,7 +110,7 @@ const Login = () => {
                 setPassword(e.target.value);
               }}
             />
-            <Components.Button onClick={handleSignin}>
+            <Components.Button>
               Sign In
             </Components.Button>
             {isLoading && <LoadingOverlay />}

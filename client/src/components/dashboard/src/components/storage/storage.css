@@ -5,11 +5,15 @@
     margin-bottom: 50px;
 }
 
+.bit_dash_btnn{
 
+    margin-left: auto;
+    margin-right: 20px;
+}
 
 .bit_dash_btnn button{
     cursor: pointer;
-    margin-left: 2400%;
+    /* margin-left: 2400%; */
     background-color: orangered;
     margin-top: 20px;
     border: none;

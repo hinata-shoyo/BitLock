@@ -39,7 +39,8 @@ const Signup = () => {
   };
 
   const handleSignup = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
+
     setIsLoading(true);
     try {
       const response = await axios.post(
@@ -56,7 +57,7 @@ const Signup = () => {
       setError(error.response.data.msg);
       setTimeout(() => {
         // window.location.reload();
-        navigate("/signin", { replace: true });
+        navigate("/signup", { replace: true });
         setIsLoading(false);
       }, 1500);
     }
@@ -66,7 +67,7 @@ const Signup = () => {
     <Components.Bodyy>
       <Components.Container>
         <Components.SignUpContainer signinIn={signIn}>
-          <Components.Form>
+          <Components.Form onSubmit={handleSignup}>
             <Components.Title>Create Account</Components.Title>
             <Components.Input
               type="text"
@@ -82,7 +83,7 @@ const Signup = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Components.Button onClick={(e) => handleSignup}>
+            <Components.Button >
               Sign Up
             </Components.Button>
             {isLoading && <LoadingOverlay />}

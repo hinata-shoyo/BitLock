@@ -78,6 +78,7 @@ width: 100%;
 export const Button = styled.button`
    border-radius: 20px;
    margin-top:10px;
+   cursor:pointer;  
    border: 1px solid #ff4b2b;
    background-color: #ff4b2b;
    color: #ffffff;
@@ -97,6 +98,7 @@ export const Button = styled.button`
 export const GhostButton = styled(Button)`
 background-color: transparent;
 border-color: #ffffff;
+cursor:pointer;
 `;
 
 export const Anchor = styled.a`

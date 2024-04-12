@@ -8,18 +8,13 @@ import { useNavigate } from 'react-router-dom'
 const Dashboard = (props) => {
 
   const navigate = useNavigate()
-  const check =() => {
-    if(!props){
-    }
-  }
   
   useEffect(()=> {
-    if(!props){
+    if(!props.token){
+      
       navigate("/signin")
-      // window.location.href = "/signin"
-
-    }
-  })
+      }
+  }, [])
 
   return (
     <div className='App'>
