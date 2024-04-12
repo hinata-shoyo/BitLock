@@ -37,7 +37,8 @@
 .bit_dash_btn button{
     /* display: flex; */
     cursor: pointer;
-    margin-left: 1400%;
+    /* margin-right: ; */
+    justify-content: flex-end;
     background-color: orangered;
     margin-top:50px;
     border: none;

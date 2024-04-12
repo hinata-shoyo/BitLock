@@ -51,6 +51,7 @@ const Storage = () => {
   }, []);
 
   const handlePopup = () => {
+    console.log("here")
     setisVisible(!isvisible);
   };
 
@@ -60,7 +61,7 @@ const Storage = () => {
         <div className="storage_title">
           <h2>Storage Area</h2>
           <div className="bit_dash_btnn">
-            <button onclick={handlePopup}>ADD</button>
+            <button onClick={handlePopup}>ADD</button>
             {isvisible && <Popup2 />}
           </div>
         </div>

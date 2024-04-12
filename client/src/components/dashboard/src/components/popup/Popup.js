@@ -25,7 +25,7 @@ function Popup() {
         },
       }
     );
-   await axios.post("https://bit-lock.vercel.app/user/upload", formData, {
+   await axios.put("https://bit-lock.vercel.app/user/upload", formData, {
       headers: {
         Authorization: `bearer ${window.localStorage.getItem("token")}`,
         "Content-Type": "multipart/form-data"

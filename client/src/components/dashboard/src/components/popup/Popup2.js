@@ -45,30 +45,28 @@ function Popup2() {
 
   return (
     <div className="popup">
-      {/* <form encType="multipart/form-data" onSubmit={handleSubmit}> */}
-      <input
-        type="text"
-        placeholder="Document Title"
-        value={title}
-        name="title"
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      {/* <input
+      <form encType="multipart/form-data" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Document Title"
+          value={title}
+          name="title"
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        {/* <input
           type="text"
           placeholder="Last Name"
           value={input2}
           onChange={(e) => setInput2(e.target.value)}
         /> */}
-      <input
-        type="file"
-        name="file"
-        onChange={(e) => setFile(e.target.files[0])}
-      />
+        <input
+          type="file"
+          name="file"
+          onChange={(e) => setFile(e.target.files[0])}
+        />
 
-      <button type="submit" onClick={handleSubmit}>
-        Submit
-      </button>
-      {/* </form> */}
+        <button type="submit">Submit</button>
+      </form>
     </div>
   );
 }
