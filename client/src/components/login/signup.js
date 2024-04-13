@@ -27,7 +27,8 @@ const Signup = () => {
       console.log(response.data.token);
       const token = response.data.token;
       window.localStorage.setItem("token", token);
-      navigate("/dashboard");
+      // navigate("/dashboard", {state:{token:token}});
+      window.location.href = "/dashboard"
       setIsLoading(false);
     } catch (error) {
       setError(error.response.data.msg);
@@ -40,7 +41,7 @@ const Signup = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-
+    console.log("signup hit")
     setIsLoading(true);
     try {
       const response = await axios.post(
@@ -51,7 +52,7 @@ const Signup = () => {
         }
       );
       console.log(response.data);
-      handleSignin();
+      handleSignin(e);
       setIsLoading(false);
     } catch (error) {
       setError(error.response.data.msg);

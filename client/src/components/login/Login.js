@@ -14,8 +14,9 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleSignin = async (e) => {
-    e.preventDefault();
+    console.log("signin hit")
     setIsLoading(true);
+    e.preventDefault();
     try {
       const response = await axios.post(
         "https://bit-lock.vercel.app/user/login",
@@ -24,11 +25,13 @@ const Login = () => {
           password,
         }
       );
+      console.log(response)
       console.log(response.data);
       const token = response.data.token;
       window.localStorage.setItem("token", token);
-      navigate("/dashboard");
+      // navigate("/dashboard");
       setIsLoading(false);
+      window.location.href="/dashboard"
     } catch (error) {
       setError(error.response.data.msg);
       setTimeout(() => {
@@ -39,9 +42,9 @@ const Login = () => {
   };
 
   const handleSignup = async (e) => {
-    e.preventDefault();
-    // console.log("aam")
+    console.log("signup hit")
     setIsLoading(true);
+    e.preventDefault();
     try {
       const response = await axios.post(
         "https://bit-lock.vercel.app/user/signup",
@@ -51,7 +54,7 @@ const Login = () => {
         }
       );
       console.log(response.data);
-      handleSignin();
+      handleSignin(e);
       setIsLoading(false);
     } catch (error) {
       setError(error.response.data.msg);
