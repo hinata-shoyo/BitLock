@@ -6,28 +6,31 @@ import axios from "axios";
 import Popup2 from "../popup/Popup2";
 
 const Card = (props) => {
-
-  // const handledelete = () =>{
-  //   try {
-  //     axios.delete("https://bit-lock.vercel.app/doc/delete"
-
-  //     )
-
-  //   } catch (error) {
-
-  //   }
-  // }
+  const handledelete = async (id) => {
+    try {
+      await axios.delete(`https://bit-lock.vercel.app/doc/delete${id}`, {
+        headers: {
+          authorization: `bearer ${window.localStorage.getItem("token")}`,
+        },
+      });
+      window.location.reload()
+    } catch (error) {}
+  };
 
   return (
     <div className="bit_storage_smallbox">
       <a href={`${props.link}`} target="_blank">
         <img src={document} alt="folder" />
         <h3 className="link">{props.title}</h3>
-        <div className="bit_storage_smallbox_bottom">
-          <h5 className="link">delete file</h5>
-          <h6>120 kb</h6>
-        </div>
       </a>
+      <div className="bit_storage_smallbox_bottom">
+        <h5 className="link">
+          <button className="del_button" onClick={() => handledelete(props.id)}>
+            Delete
+          </button>
+        </h5>
+        {/* <h6>120 kb</h6> */}
+      </div>
     </div>
   );
 };
@@ -51,7 +54,7 @@ const Storage = () => {
   }, []);
 
   const handlePopup = () => {
-    console.log("here")
+    console.log("here");
     setisVisible(!isvisible);
   };
 
@@ -67,7 +70,7 @@ const Storage = () => {
         </div>
         <div className="col">
           {docs.map((docs) => {
-            return <Card title={docs.title} link={docs.link} />;
+            return <Card title={docs.title} link={docs.link} id={docs._id} />;
           })}
         </div>
       </div>
