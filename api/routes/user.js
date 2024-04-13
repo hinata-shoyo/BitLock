@@ -41,21 +41,26 @@ Router.post("/login", async (req, res) => {
 
 Router.put("/upload", authUser, upload.single("file"), async (req, res) => {
   const file = req.file;
-  console.log("here");
+  console.log("in upload");
   // const { firstName, lastName } = req.body;
-  const user = await User.findOneAndUpdate(
-    { username: req.username },
-    { profilePicture: file.filename },
-    { new: true, runValidators: true }
-  );
-  user
-    .save()
-    .then((data) => {
-      res.json({ msg: "uploaded successfully", data });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  try {
+    const user = await User.findOneAndUpdate(
+      { username: req.username },
+      { profilePicture: file.filename },
+      { new: true, runValidators: true }
+    );
+    user
+      .save()
+      .then((data) => {
+        res.json({ msg: "uploaded successfully", data });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    
+  } catch (error) {
+    console.log(error)
+  }
 });
 
 Router.put("/uploadName", authUser, async (req, res) => {

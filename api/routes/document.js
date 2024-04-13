@@ -31,6 +31,7 @@ Router.get("/", authUser, async (req, res) => {
 });
 
 Router.post("/upload", authUser, upload.single('file'), async (req, res) => {
+  // console.log("in upload")
   const dateTime = giveCurrentDateTime()
   console.log(req.body.title)
   const storageRef = ref(storage, `files/${req.file.originalname + '   ' + dateTime}`)
