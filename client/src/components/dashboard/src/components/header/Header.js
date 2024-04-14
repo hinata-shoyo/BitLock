@@ -44,8 +44,8 @@ const Header = (props) => {
         <div>
           <img
             className="bit_dash_image"
-            src={`https://bit-lock.vercel.app/${file}`}
-            // src={dp}
+            // src={`https://bit-lock.vercel.app/${file}`}
+            src={dp}
             // onError={e => {
             //   e.target.src = { dp };
             //   e.onerror = null;

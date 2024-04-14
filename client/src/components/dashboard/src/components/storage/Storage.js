@@ -8,7 +8,7 @@ import Popup2 from "../popup/Popup2";
 const Card = (props) => {
   const handledelete = async (id) => {
     try {
-      await axios.delete(`https://bit-lock.vercel.app/doc/delete${id}`, {
+      const response = await axios.delete(`https://bit-lock.vercel.app/doc/delete${id}`, {
         headers: {
           authorization: `bearer ${window.localStorage.getItem("token")}`,
         },
@@ -38,6 +38,7 @@ const Card = (props) => {
 const Storage = () => {
   const [isvisible, setisVisible] = useState(false);
   const [docs, setdocs] = useState([]);
+
   const getarray = async () => {
     const response = await axios.get("https://bit-lock.vercel.app/doc", {
       headers: {
@@ -47,6 +48,13 @@ const Storage = () => {
     setdocs(response.data.documents);
     console.log(docs);
   };
+
+  // useEffect(()=>{
+  //   const handle = () => {
+
+  //   }
+    
+  // })
 
   useEffect(() => {
     setisVisible(false);
@@ -70,7 +78,7 @@ const Storage = () => {
         </div>
         <div className="col">
           {docs.map((docs) => {
-            return <Card title={docs.title} link={docs.link} id={docs._id} />;
+            return <Card title={docs.title} link={docs.link} id={docs._id}/>;
           })}
         </div>
       </div>
