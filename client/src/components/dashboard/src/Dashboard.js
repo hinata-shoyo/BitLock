@@ -25,7 +25,7 @@ const Dashboard = (props) => {
             <Navbar />
             <Header/>
         </div>
-        {/* <Details/> */}
+        <Details/> 
         <Storage/>
         <Footer/>
     </div>

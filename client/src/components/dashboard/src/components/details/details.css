@@ -6,7 +6,7 @@
 
 .bit_details_box{
     display: flex;
-    background-color: #9ADAEE;
+    background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
     padding: 10px;
     border-radius: 20px;
     margin-right: 20px;
@@ -27,21 +27,23 @@
 }
 
 .bit_details_name1_box1{
-    background-color: black;
-    color:white;
+    background-color: #E1B1D1;
+    color:black;
     padding: 20px;
     font-size: 25px;
     border-radius: 30px;
+    border:5px solid white;
 }
 
 .bit_details_name1_box2{
-    background-color: black;
-    color:white;
+    background-color: #E1B1D1;
+    color:black;
     padding: 20px;
     font-size: 25px;
     border-radius: 30px;
     margin-left: 280px;
     margin-right: 20px;
+    border:5px solid white;
 }
 
 .bit_details_name2{
@@ -52,21 +54,23 @@
 }
 
 .bit_details_name2_box1{
-    background-color: black;
-    color:white;
+    background-color: #E1B1D1;
+    color:black;
     padding: 20px;
     font-size: 25px;
     border-radius: 30px;
+    border:5px solid white;
 }
 
 .bit_details_name2_box2{
-    background-color: black;
-    color:white;
+    background-color: #E1B1D1;
+    color:black;
     padding: 20px;
     font-size: 25px;
     border-radius: 30px;
     margin-left: 465px;
     margin-right: 20px;
+    border:5px solid white;
 }
 @media screen and (max-width:1500px) {
     .bit_details_box{
